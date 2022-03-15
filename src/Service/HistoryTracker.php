@@ -4,16 +4,27 @@ declare(strict_types = 1);
 
 namespace App\Service;
 
-use App\Event\CustomerDeleted;
-use App\Event\SalePriceChanged;
+use App\Event\OrderPaid;
+use App\Event\OrderPlaced;
+use http\Message;
 
 /**
- * ⚠️ in my Event-driven system, there are more than 80x events for different domains, that need to be tracked and archived.
+ * use case:
+ * ⚠️ in my Event-driven system, I have more than 80x events for different domains, that need to be tracked and archived.
  * Can we simplify this service by using interface?
  */
 final class HistoryTracker
 {
-    public function trackCustomerDeleted(CustomerDeleted $event): void
+    private MessagePublisherInterface $publisher;
+    private MessageLoggerInterface $logger;
+
+    public function __construct(MessagePublisherInterface $publisher, MessageLoggerInterface $logger)
+    {
+        $this->publisher = $publisher;
+        $this->logger = $logger;
+    }
+
+    public function trackOrderPlaced(OrderPlaced $event): void
     {
         // serialize the event
 
@@ -22,7 +33,7 @@ final class HistoryTracker
         // save serialized message to mongoDB
     }
 
-    public function trackSalePriceChanged(SalePriceChanged $event): void
+    public function trackOrderPaid(OrderPaid $event): void
     {
         // serialize the event
 
@@ -37,22 +48,26 @@ final class HistoryTracker
     // public function trackEvent3(): void
     // ...
 
+    /**
+     * Conform typing by using interface
+     * ✅ Single responsibility
+     * the logic for serializing event is located within event itself
+     *
+     */
     public function track(JsonSerializableEvent $event): void
     {
+        /**
+         * other awesome logic here
+         */
+
+        dump(get_class($event));
+
         $message = $event->toJson();
-        dump($message);
+        $this->publisher->publish($message);
+        $this->logger->log($message);
 
-        $this->pushMessage($message);
-        $this->saveMessage($message);
-    }
-
-    private function pushMessage(string $message): void
-    {
-        // push serialized message to queue
-    }
-
-    private function saveMessage(string $message): void
-    {
-        // save serialized message to mongoDB
+        /**
+         * other awesome logic here
+         */
     }
 }
