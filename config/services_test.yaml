@@ -1,0 +1,4 @@
+#services:
+#    App\Service\User\UserManager:
+#        public: true
+#        arguments: [ '@App\Service\User\UserClientMock' ]
