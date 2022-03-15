@@ -1,0 +1,20 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+    _instanceof:
+        App\Domain\Voucher\Rule\RedeemableInterface:
+            tags: ['voucher.rules']
+
+    App\Service\VoucherRedeemer:
+        arguments:
+            $voucherRules: !tagged_iterator voucher.rules
