@@ -4,16 +4,17 @@ declare(strict_types = 1);
 
 namespace App\Service;
 
-use App\Event\CustomerDeleted;
-use App\Event\SalePriceChanged;
+use App\Event\OrderPaid;
+use App\Event\OrderPlaced;
 
 /**
- * ⚠️ in my Event-driven system, there are more than 80x events for different domains, that need to be tracked and archived.
+ * use case:
+ * ⚠️ in my Event-driven system, I have more than 80x events for different domains, that need to be tracked and archived.
  * Can we simplify this service by using interface?
  */
 final class HistoryTracker
 {
-    public function trackCustomerDeleted(CustomerDeleted $event): void
+    public function trackOrderPlaced(OrderPlaced $event): void
     {
         // serialize the event
 
@@ -22,7 +23,7 @@ final class HistoryTracker
         // save serialized message to mongoDB
     }
 
-    public function trackSalePriceChanged(SalePriceChanged $event): void
+    public function trackOrderPaid(OrderPaid $event): void
     {
         // serialize the event
 
