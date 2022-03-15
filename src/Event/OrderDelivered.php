@@ -11,4 +11,11 @@ final class OrderDelivered
     private string $customerId;
     private string $oderId;
     private DateTimeImmutable $deliveredAt;
+
+    public function __construct(string $customerId, string $oderId, DateTimeImmutable $deliveredAt)
+    {
+        $this->customerId = $customerId;
+        $this->oderId = $oderId;
+        $this->deliveredAt = $deliveredAt;
+    }
 }
