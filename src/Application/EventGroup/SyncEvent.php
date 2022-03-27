@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Application\Interfaces;
+namespace App\Application\EventGroup;
 
 interface SyncEvent
 {
