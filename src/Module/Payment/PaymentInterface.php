@@ -6,6 +6,7 @@ namespace App\Module\Payment;
 
 use App\Domain\Order;
 
-interface LidlPayInterface extends PaymentInterface
+interface PaymentInterface
 {
+    public function payOrder(Order $order): void;
 }

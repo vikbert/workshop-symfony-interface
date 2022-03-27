@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Module\ESB;
 
-interface LocationRepositoryInterface
+interface LocationSecuredRestInterface extends SecuredRestInterface
 {
     public function listCountries(): iterable;
 
