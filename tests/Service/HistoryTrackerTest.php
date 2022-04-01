@@ -15,11 +15,12 @@ class HistoryTrackerTest extends TestCase
     public function testTrackMethod(): void
     {
         $tracker = new HistoryTracker();
+        $current = new DateTimeImmutable();
 
-        $event = new OrderPlaced('customer-1', 'order-1', new DateTimeImmutable());
+        $event = new OrderPlaced('customer-1', 'order-1', $current);
         $tracker->trackOrderPlaced($event);
 
-        $event = new OrderPaid('customer-1', 'order-1', 'payment-1', new DateTimeImmutable());
+        $event = new OrderPaid('customer-1', 'order-1', 'payment-1', $current);
         $tracker->trackOrderPaid($event);
 
         $this->assertTrue(true);
