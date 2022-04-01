@@ -50,6 +50,9 @@ class UserManagerTest extends KernelTestCase
         $this->assertEquals('http://my_url', $avatarUrl);
     }
 
+    /**
+     * functional
+     */
     public function testUserManagerByCreatingNewInstance(): void
     {
         $manager = new UserManager(new UserClientMock());
@@ -58,6 +61,9 @@ class UserManagerTest extends KernelTestCase
         $this->assertEquals('http://my_url', $avatarUrl);
     }
 
+    /**
+     * integration
+     */
     public function testUerManagerByLoadingServiceFromContainer(): void
     {
         $manager = self::$kernel->getContainer()->get(UserManager::class);
