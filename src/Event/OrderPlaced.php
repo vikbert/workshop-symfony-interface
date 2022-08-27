@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace App\Event;
 
-use App\Service\JsonSerializableEvent;
+use App\Service\TrackableEvent;
 use DateTimeImmutable;
 
-final class OrderPlaced implements JsonSerializableEvent
+final class OrderPlaced implements TrackableEvent
 {
     private string $customerId;
     private string $orderId;

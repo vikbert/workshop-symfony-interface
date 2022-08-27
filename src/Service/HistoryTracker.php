@@ -6,11 +6,10 @@ namespace App\Service;
 
 use App\Event\OrderPaid;
 use App\Event\OrderPlaced;
-use http\Message;
 
 /**
  * use case:
- * ⚠️ in my Event-driven system, I have more than 80x events for different domains, that need to be tracked and archived.
+ * ⚠️ in my Event-driven system, I have plenty of events for different domains, that need to be tracked and archived.
  * Can we simplify this service by using interface?
  */
 final class HistoryTracker
@@ -51,23 +50,20 @@ final class HistoryTracker
     /**
      * Conform typing by using interface
      * ✅ Single responsibility
-     * the logic for serializing event is located within event itself
-     *
+     * the logic for serializing event is located within event itself.
      */
-    public function track(JsonSerializableEvent $event): void
+    public function track(TrackableEvent $event): void
     {
         /**
-         * other awesome logic here
+         * other awesome logic here.
          */
-
         dump(get_class($event));
 
         $message = $event->toJson();
         $this->publisher->publish($message);
         $this->logger->log($message);
-
         /**
-         * other awesome logic here
+         * other awesome logic here.
          */
     }
 }
