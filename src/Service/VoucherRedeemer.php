@@ -12,11 +12,14 @@ use App\Entity\Voucher;
  * Business logic for redeeming voucher is one of most complex issue in Online shops
  * The logic behind vouchers will be oft changed based on marketing strategy.
  *
- * 🔥 Open-closed principle 🔥
  * is there any better way without changing Service "VoucherRedeemer::redeem()", if we
  * -> add new rules
  * -> delete expired rules
  * -> update rules
+ *
+ *
+ *
+ * 🔥 Open-closed principle 🔥
  */
 final class VoucherRedeemer
 {
